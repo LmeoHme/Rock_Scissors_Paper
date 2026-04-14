@@ -1,22 +1,45 @@
-function getPlayerInput(title, proceedChoice, exitChoice)
+function getPlayerAgreement()
 {
-    let playerInput = prompt(title).trim();
-    let validInput = validatePlayerInput(playerInput, proceedChoice, exitChoice);
-    if (validInput === exitChoice) return;
-    else return validInput;
+    let playerAgreement = prompt("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No");
+    let validAgreement = validatePlayerAgreement(playerAgreement);
+    if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
+        {
+            alert("Bye");
+            return;
+        }
+    else return;
 }
 
-function validatePlayerInput(playerInput, proceedChoice, exitChoice)
+function validatePlayerAgreement(playerAgreement)
 {
-    if (playerInput === "" || playerInput === null || playerInput === undefined) return "2";
-    while (playerInput !== proceedChoice || playerInput !== exitChoice)
+    let isValidAgreement = false;
+    while (!isValidAgreement)
     {
-        if (playerInput !== proceedChoice || playerInput !== exitChoice)
+        if (playerAgreement === null || playerAgreement === undefined) return "no";
+        playerAgreement = playerAgreement.trim().toLowerCase();
+        switch (playerAgreement) 
         {
-            playerInput = prompt("Invalid chocie, please try again").trim();
+            case "1": case "2": case "y": 
+            case "n": case "yes": case "no":
+            isValidAgreement = true;
+            return playerAgreement;
+            default:
+                playerAgreement = prompt("Invalid chocie, please try again");
+                break;
         }
     }
-    return playerInput;
 }
 
-getPlayerInput("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No", "1", "2");
+function getPlayerChoice()
+{
+    let playerChoice = prompt("Please make a choice:\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
+    let valicChoice = validatePlayerChoice(playerAgreement);
+    if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
+        {
+            alert("Bye");
+            return;
+        }
+    else return;
+
+}
+
