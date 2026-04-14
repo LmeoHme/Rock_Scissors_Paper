@@ -66,7 +66,41 @@ function validatePlayerChoice(playerChoice)
 }
 //#endregion
 
+function getComputerChoice()
+{
+    let randomNumber = Math.random();
+    if (randomNumber >= 0 && randomNumber < 1/3)
+    {
+        return "rock";
+    }
+    else if (randomNumber >= 1/3 && randomNumber < 2/3)
+    {
+        return "scissors";
+    }
+    else return "paper";
+}
+
+function getWinner(playerChoice, computerChoice)
+{
+    
+}
+
 if (getPlayerAgreement() === "yes")
 {
+    let playerScore = 0;
+    let computerScore = 0;
+    let isPlaying = true;
     let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
+
+
+
+    // console.log(playerChoice);
+    // console.log(computerChoice);
+    // while (isPlaying)
+    // {
+
+    // }
+
+
 }
