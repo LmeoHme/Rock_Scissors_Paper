@@ -1,12 +1,14 @@
+//#region Input validation
 function getPlayerAgreement()
 {
     let playerAgreement = prompt("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No");
     let validAgreement = validatePlayerAgreement(playerAgreement);
     if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
-        {
-            alert("Bye");
-            return;
-        }
+    {
+        alert("Bye");
+        return;
+    }
+    else return "yes";
 }
 
 function validatePlayerAgreement(playerAgreement)
@@ -62,6 +64,9 @@ function validatePlayerChoice(playerChoice)
         }
     }
 }
+//#endregion
 
-getPlayerAgreement();
-let playerChoice = getPlayerChoice();
+if (getPlayerAgreement() === "yes")
+{
+    let playerChoice = getPlayerChoice();
+}
