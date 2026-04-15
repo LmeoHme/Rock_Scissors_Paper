@@ -1,7 +1,7 @@
 //#region Input validation
-function getPlayerAgreement()
+function getPlayerAgreement(promote)
 {
-    let playerAgreement = prompt("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No");
+    let playerAgreement = prompt(promote);
     let validAgreement = validatePlayerAgreement(playerAgreement);
     if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
     {
@@ -34,13 +34,8 @@ function validatePlayerAgreement(playerAgreement)
 function getPlayerChoice()
 {
     let playerChoice = prompt("Please make a choice:\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
-    let valicChoice = validatePlayerChoice(playerChoice);
-    if (valicChoice === "exit" || valicChoice === "Exit" || valicChoice === "EXIT" || valicChoice === "0")
-    {
-        alert("Bye");
-        return;
-    }
-    else return valicChoice;
+    let validChoice = validatePlayerChoice(playerChoice);
+    return validChoice;
 }
 
 function validatePlayerChoice(playerChoice)
@@ -82,25 +77,75 @@ function getComputerChoice()
 
 function getWinner(playerChoice, computerChoice)
 {
-    
+    if 
+    (((playerChoice === "1" || playerChoice === "rock") && computerChoice === "scissors") || 
+     ((playerChoice === "2" || playerChoice === "scissors") && computerChoice === "paper") ||
+     ((playerChoice === "3" || playerChoice === "paper") && computerChoice === "rock"))
+    {
+        return "player wins";
+    }
+    else if  
+    (((playerChoice === "1" || playerChoice === "rock") && computerChoice === "paper") || 
+     ((playerChoice === "2" || playerChoice === "scissors") && computerChoice === "rock") ||
+     ((playerChoice === "3" || playerChoice === "paper") && computerChoice === "scissors"))
+     {
+        return "computer wins";
+     }
+     else return "draw";
 }
 
-if (getPlayerAgreement() === "yes")
+function getFinalWinner()
 {
     let playerScore = 0;
     let computerScore = 0;
     let isPlaying = true;
-    let playerChoice = getPlayerChoice();
-    let computerChoice = getComputerChoice();
 
+    while (isPlaying)
+    {
+        let computerChoice = getComputerChoice();
+        let playerChoice = getPlayerChoice();
+        if (playerChoice === "exit" || playerChoice === "Exit" || playerChoice === "EXIT" || playerChoice === "0")
+        {
+            break; 
+        }
+    
+        switch(getWinner(playerChoice, computerChoice))
+        {
+            case "player wins":
+                playerScore++;
+                alert("You won this round.")
+                console.log("Player wins")
+                break;
+            case "computer wins":
+                computerScore++;
+                alert("Computer won this round.")
+                console.log("Comp wins")
+                break;
+            case "draw":
+                alert("Draw. Re-fight.")
+                console.log("drawn");
+                break;
+        }
+        if (playerScore === 3 || computerScore === 3) isPlaying = false;
+    }
 
+    if (playerScore === 3) return "player won";
+    else if (computerScore === 3) return "computer won"
+    else return "exit";
+}
 
-    // console.log(playerChoice);
-    // console.log(computerChoice);
-    // while (isPlaying)
-    // {
+if (getPlayerAgreement("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No") === "yes")
+{
 
-    // }
-
-
+    if (getFinalWinner() === "player won") 
+    {
+        alert("Congratulations! You won the match!");
+        getPlayerAgreement("Get another domination?\n1.Why not?\n2.No thanks");
+    }
+    else if (getFinalWinner() === "computer won")
+    {
+        alert("Computer won the match.");
+        getPlayerAgreement("Wanna re-match?\n1.Revenge\n2.Nah!");
+    }
+    else alert("Bye");
 }
