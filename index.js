@@ -2,7 +2,7 @@
 function getPlayerAgreement(promote)
 {
     let playerAgreement = prompt(promote);
-    let validAgreement = validatePlayerAgreement(playerAgreement);
+    let validAgreement = validatePlayerAgreement(playerAgreement, promote);
     if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
     {
         alert("Bye");
@@ -11,7 +11,7 @@ function getPlayerAgreement(promote)
     else return "yes";
 }
 
-function validatePlayerAgreement(playerAgreement)
+function validatePlayerAgreement(playerAgreement, promote)
 {
     let isValidAgreement = false;
     while (!isValidAgreement)
@@ -25,7 +25,7 @@ function validatePlayerAgreement(playerAgreement)
             isValidAgreement = true;
             return playerAgreement;
             default:
-                playerAgreement = prompt("Invalid chocie, please try again.\n1.Yes\n2.No");
+                playerAgreement = prompt("Invalid chocie, please try again.\n" + promote);
                 break;
         }
     }
@@ -61,6 +61,7 @@ function validatePlayerChoice(playerChoice)
 }
 //#endregion
 
+//#region Gane Flow Logic Handling
 function getComputerChoice()
 {
     let randomNumber = Math.random();
@@ -123,9 +124,13 @@ function getFinalWinner()
                 break;
             case "draw":
                 alert("Draw. Re-fight.")
-                console.log("drawn");
+                console.log("Draw");
                 break;
         }
+
+        console.log(playerScore);
+        console.log(computerScore);
+
         if (playerScore === 3 || computerScore === 3) isPlaying = false;
     }
 
@@ -133,19 +138,28 @@ function getFinalWinner()
     else if (computerScore === 3) return "computer won"
     else return "exit";
 }
+//#endregion
 
 if (getPlayerAgreement("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No") === "yes")
 {
-
-    if (getFinalWinner() === "player won") 
+    let isPlaying = true;
+    while (isPlaying)
     {
-        alert("Congratulations! You won the match!");
-        getPlayerAgreement("Get another domination?\n1.Why not?\n2.No thanks");
+        let result = getFinalWinner();
+        if (result === "player won") 
+        {
+            alert("Congratulations! You won the match!");
+            if (getPlayerAgreement("Get another domination?\n1.Why not?\n2.No thanks") !== "yes") isPlaying = false;
+        }
+        else if (result === "computer won")
+        {
+            alert("Computer won the match.");
+            if (getPlayerAgreement("Wanna re-match?\n1.Revenge\n2.Nah!") !== "yes") isPlaying = false;
+        }
+        else 
+        {
+            alert("Bye");
+            isPlaying = false;
+        }
     }
-    else if (getFinalWinner() === "computer won")
-    {
-        alert("Computer won the match.");
-        getPlayerAgreement("Wanna re-match?\n1.Revenge\n2.Nah!");
-    }
-    else alert("Bye");
 }
