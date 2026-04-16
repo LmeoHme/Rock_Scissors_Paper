@@ -62,12 +62,12 @@ function validatePlayerChoice(playerChoice)
 //#region Gane Flow Logic Handling
 function getComputerChoice()
 {
-    let randomNumber = Math.random();
-    if (randomNumber >= 0 && randomNumber < 1/3)
+    let randomNumber = Math.floor(Math.random() * 3);
+    if (randomNumber >= 0 && randomNumber < 1)
     {
         return "rock";
     }
-    else if (randomNumber >= 1/3 && randomNumber < 2/3)
+    else if (randomNumber >= 1 && randomNumber < 2)
     {
         return "scissors";
     }
