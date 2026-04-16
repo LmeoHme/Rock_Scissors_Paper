@@ -25,7 +25,7 @@ function validatePlayerAgreement(playerAgreement, promote)
             isValidAgreement = true;
             return playerAgreement;
             default:
-                playerAgreement = prompt("Invalid chocie, please try again.\n" + promote);
+                playerAgreement = prompt("Invalid choice, please try again.\n" + promote);
                 break;
         }
     }
@@ -49,12 +49,10 @@ function validatePlayerChoice(playerChoice)
         {
             case "1": case "2": case "3": case "0": 
             case "rock": case "scissors": case "paper": case "exit":
-            case "Rock": case "Scissors": case "Paper": case "Exit":
-            case "ROCK": case "SCISSORS": case "PAPER": case "EXIT":
             isvalidChoice = true;
             return playerChoice;
             default:
-                playerChoice = prompt("Invalid chocie, please try again.\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
+                playerChoice = prompt("Invalid choice, please try again.\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
                 break;
         }
     }
