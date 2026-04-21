@@ -1,3 +1,8 @@
+let playerScore = 0;
+let computerScore = 0;
+let playerChoice;
+let computerChoice;
+
 //#region Query Select & Listeners Attach
 const title = document.querySelector("#title");
 const promote = document.querySelector("#promote");
@@ -19,8 +24,8 @@ choiceContainer.addEventListener("mouseover", e => {
 choiceContainer.addEventListener("mouseout", e => e.target.setAttribute("style", "border: none"));
 
 choiceContainer.addEventListener("click", e => {
-    playerChoice = e.target.id
-    calculateScore(getRoundWinner(playerChoice, computerChoice));
+    playerChoice = e.target.id;
+    handlePlayground(playerChoice);
 }); 
 //#endregion
 
@@ -81,13 +86,19 @@ function calculateScore(roundResult)
     }
 }
 
-function handlePlayground()
+function handlePlayground(playerChoice)
 {
-    let playerChoice 
-    let computerChoice = getComputerChoice();
-    console.log(computerChoice);
-    let playerScore = 0;
-    let computerScore = 0;
+    computerChoice = getComputerChoice();
+    let roundResult = getRoundWinner(playerChoice, computerChoice);
+    calculateScore(roundResult);
+}
+
+function getMatchWinner(playerScore, computerScore)
+{
+    if (playerScore === 3) 
+    {
+        
+    }
 }
 // -- Show UI --
 function showChoiceUI(playerChoice, computerChoice)
