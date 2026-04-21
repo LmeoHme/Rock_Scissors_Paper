@@ -5,17 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
-    <script type="module" src="index.j"></script>
+    <script type="module" src="index.js"></script>
 </head>
 <body>
     <h1 id="title">Rock - Scissors - Paper Game</h1>
-    <h3 id="promote">Please make a choice</h3>
-    <div id="container"> 
-        <img src="/img/The_Rock.jpg" alt="Rock">
-        <img src="/img/Scissors.jpg" alt="Scissors">
-        <img src="/img/Paper.jpg" alt="Paper">
+
+    <div id="instructions">
+        <h3>Instrucions:</h3>
+        <ol>
+            <li>1. Choose one of three selecions below.</li>
+            <li>2. Win 1 time gain you 1 score.</li>
+            <li>3. Win 3 times to get the final win. Good luck.</li>
+        </ol>
+    </div>
+    
+    <div id="choice-container"> 
+        <img id="rock" src="/img/The_Rock.jpg" alt="Rock">
+        <img id="scissors" src="/img/Scissors.jpg" alt="Scissors">
+        <img id="paper" src="/img/Paper.jpg" alt="Paper">
     </div>
 
-    <div id="result">???</div>
+    <div id="result">
+        <p class="choicesUI"></p>
+        <p class="playerScoreUI"></p>
+        <p class="computerScoreUI"></p>
+        <p class="announcement"></p>
+    </div>
 </body>
 </html>

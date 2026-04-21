@@ -9,42 +9,64 @@ body {
     justify-content: center;
     align-items: center;
     flex-flow: column;
-    padding: 48px;
-    min-width: 520px;
+    padding: 24px;
+    min-width: 560px;
+}
+
+ol 
+{
+    list-style: none;
 }
 
 #title {
     color: rgb(255, 255, 255);
     font-size: 72px;
     padding: 16px 32px;
-    margin-bottom: 36px;
-    text-align: center;
-}
-
-#promote {
-    color: rgb(255, 255, 255);
-    font-size: 56px;
     margin-bottom: 16px;
     text-align: center;
 }
 
-#container {
+#instructions {
+    color: rgb(255, 255, 255);
+    font-size: 36px;
     margin-bottom: 36px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+#instructions h3 {
+    font-size: 48px;
+    text-decoration: underline;
+}
+
+#choice-container {
+    margin-bottom: 16px;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
 }
-#container img {
+#choice-container img {
     height: 400px;
     width: 300px;
     object-fit: cover;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 #result {
     color: rgb(255, 255, 255);
     font-size: 36px;
     padding: 8px 16px;
+}
+#result p {
+    margin: 8px;
+}
+#result .announcement {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    padding: 8px;
 }

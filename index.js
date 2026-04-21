@@ -1,163 +1,103 @@
-//#region Input validation
-function getPlayerAgreement(promote)
-{
-    let playerAgreement = prompt(promote);
-    let validAgreement = validatePlayerAgreement(playerAgreement, promote);
-    if (validAgreement === "2" || validAgreement === "n" || validAgreement === "no") 
-    {
-        alert("Bye");
-        return;
-    }
-    else return "yes";
-}
+let playerChoice 
+let computerChoice = getComputerChoice();
+console.log(computerChoice);
+let playerScore = 0;
+let computerScore = 0;
 
-function validatePlayerAgreement(playerAgreement, promote)
-{
-    let isValidAgreement = false;
-    while (!isValidAgreement)
-    {
-        if (playerAgreement === null || playerAgreement === undefined) return "no";
-        playerAgreement = playerAgreement.trim().toLowerCase();
-        switch (playerAgreement) 
-        {
-            case "1": case "2": case "y": 
-            case "n": case "yes": case "no":
-            isValidAgreement = true;
-            return playerAgreement;
-            default:
-                playerAgreement = prompt("Invalid choice, please try again.\n" + promote);
-                break;
-        }
-    }
-}
+//#region Query Select & Listeners Attach
+const title = document.querySelector("#title");
+const promote = document.querySelector("#promote");
+const choiceContainer = document.querySelector("#choice-container");
+const result = document.querySelector("#result");
+const choicesUI = result.firstElementChild;
+const playerScoreUI = choicesUI.nextElementSibling;
+const computerScoreUI = playerScoreUI.nextElementSibling;
+const announcement = computerScoreUI.nextElementSibling;
 
-function getPlayerChoice()
-{
-    let playerChoice = prompt("Please make a choice:\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
-    let validChoice = validatePlayerChoice(playerChoice);
-    return validChoice;
-}
-
-function validatePlayerChoice(playerChoice)
-{
-    let isvalidChoice = false;
-    while (!isvalidChoice)
+choiceContainer.addEventListener("mouseover", e => {
+    if (e.target &&  e.target.nodeName === "IMG") 
     {
-        if (playerChoice === null || playerChoice === undefined) return "exit";
-        playerChoice = playerChoice.trim().toLowerCase();
-        switch (playerChoice) 
-        {
-            case "1": case "2": case "3": case "0": 
-            case "rock": case "scissors": case "paper": case "exit":
-            isvalidChoice = true;
-            return playerChoice;
-            default:
-                playerChoice = prompt("Invalid choice, please try again.\n1.Rock\n2.Scissors\n3.Paper\n0.Exit");
-                break;
-        }
+        e.stopPropagation();
+        e.target.setAttribute("style", "border: solid rgb(173, 230, 220) 10px");
     }
-}
+});
+
+choiceContainer.addEventListener("mouseout", e => e.target.setAttribute("style", "border: none"));
+
+choiceContainer.addEventListener("click", e => {
+    playerChoice = e.target.id
+
+}); 
 //#endregion
 
-//#region Gane Flow Logic Handling
+//#region Funcitons
 function getComputerChoice()
 {
-    let randomNumber = Math.floor(Math.random() * 3);
-    if (randomNumber >= 0 && randomNumber < 1)
-    {
-        return "rock";
-    }
-    else if (randomNumber >= 1 && randomNumber < 2)
-    {
-        return "scissors";
-    }
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber === 1) return "rock";
+    else if (randomNumber === 2) return "scissors";
     else return "paper";
 }
 
-function getWinner(playerChoice, computerChoice)
+function getRoundWinner(playerChoice, computerChoice)
 {
     if 
-    (((playerChoice === "1" || playerChoice === "rock") && computerChoice === "scissors") || 
-     ((playerChoice === "2" || playerChoice === "scissors") && computerChoice === "paper") ||
-     ((playerChoice === "3" || playerChoice === "paper") && computerChoice === "rock"))
+        ((playerChoice === "rock" && computerChoice === "scissors") ||
+        (playerChoice === "scissors" && computerChoice === "paper") ||
+        (playerChoice === "paper" && computerChoice === "rock"))
     {
+        showChoiceUI(playerChoice, computerChoice);
         return "player wins";
     }
-    else if  
-    (((playerChoice === "1" || playerChoice === "rock") && computerChoice === "paper") || 
-     ((playerChoice === "2" || playerChoice === "scissors") && computerChoice === "rock") ||
-     ((playerChoice === "3" || playerChoice === "paper") && computerChoice === "scissors"))
-     {
+
+    else if 
+        ((playerChoice === "rock" && computerChoice === "paper") ||
+        (playerChoice === "scissors" && computerChoice === "rock") ||
+        (playerChoice === "paper" && computerChoice === "scissors"))
+    {
+        showChoiceUI(playerChoice, computerChoice);
         return "computer wins";
-     }
-     else return "draw";
+    }
+    
+    else 
+    {
+        showChoiceUI(playerChoice, computerChoice);
+        return "draw";
+    }
 }
 
-function getFinalWinner()
+function calculateScore(roundResult)
 {
-    let playerScore = 0;
-    let computerScore = 0;
-    let isPlaying = true;
-
-    while (isPlaying)
+    switch (roundResult)
     {
-        let computerChoice = getComputerChoice();
-        let playerChoice = getPlayerChoice();
-        if (playerChoice === "exit" || playerChoice === "Exit" || playerChoice === "EXIT" || playerChoice === "0")
-        {
-            break; 
-        }
-    
-        switch(getWinner(playerChoice, computerChoice))
-        {
-            case "player wins":
-                playerScore++;
-                alert("You won this round.")
-                console.log("Player wins")
-                break;
-            case "computer wins":
-                computerScore++;
-                alert("Computer won this round.")
-                console.log("Comp wins")
-                break;
-            case "draw":
-                alert("Draw. Re-fight.")
-                console.log("Draw");
-                break;
-        }
-
-        console.log(playerScore);
-        console.log(computerScore);
-
-        if (playerScore === 3 || computerScore === 3) isPlaying = false;
+        case "player wins":
+            playerScore++;
+            showScoreUI(playerScore, computerScore);
+            announcement.innerText = "You won this round!";
+        case "computer wins":
+            computerScore++;
+            showScoreUI(playerScore, computerScore);
+            announcement.innerText = "Computer won this round!";
+        case "draw":
+            showScoreUI(playerScore, computerScore);
+            announcement.innerText = "Drawn!";
     }
+}
 
-    if (playerScore === 3) return "player won";
-    else if (computerScore === 3) return "computer won"
-    else return "exit";
+function handlePlayGround()
+{
+
+}
+// -- Show UI --
+function showChoiceUI(playerChoice, computerChoice)
+{
+    choicesUI.innerText = `You choose ${playerChoice}, conputer choose ${computerChoice}.`;
+}
+
+function showScoreUI(playerScore, computerScore)
+{
+    playerScoreUI.innerText = "Player Score: " + playerScore;
+    computerScoreUI.innerText = "Computer Score: " + computerScore;
 }
 //#endregion
 
-if (getPlayerAgreement("Do you wanna play Rock - Scissors - Paper?\n1.Yes\n2.No") === "yes")
-{
-    let isPlaying = true;
-    while (isPlaying)
-    {
-        let result = getFinalWinner();
-        if (result === "player won") 
-        {
-            alert("Congratulations! You won the match!");
-            if (getPlayerAgreement("Get another domination?\n1.Why not?\n2.No thanks") !== "yes") isPlaying = false;
-        }
-        else if (result === "computer won")
-        {
-            alert("Computer won the match.");
-            if (getPlayerAgreement("Wanna re-match?\n1.Revenge\n2.Nah!") !== "yes") isPlaying = false;
-        }
-        else 
-        {
-            alert("Bye");
-            isPlaying = false;
-        }
-    }
-}
