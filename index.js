@@ -26,7 +26,7 @@ choiceContainer.addEventListener("mouseout", e => e.target.setAttribute("style",
 
 choiceContainer.addEventListener("click", e => {
     playerChoice = e.target.id
-
+    calculateScore(getRoundWinner(playerChoice, computerChoice));
 }); 
 //#endregion
 
@@ -46,7 +46,7 @@ function getRoundWinner(playerChoice, computerChoice)
         (playerChoice === "scissors" && computerChoice === "paper") ||
         (playerChoice === "paper" && computerChoice === "rock"))
     {
-        showChoiceUI(playerChoice, computerChoice);
+        showUI(playerChoice, computerChoice);
         return "player wins";
     }
 
@@ -55,13 +55,13 @@ function getRoundWinner(playerChoice, computerChoice)
         (playerChoice === "scissors" && computerChoice === "rock") ||
         (playerChoice === "paper" && computerChoice === "scissors"))
     {
-        showChoiceUI(playerChoice, computerChoice);
+        showUI(playerChoice, computerChoice);
         return "computer wins";
     }
     
     else 
     {
-        showChoiceUI(playerChoice, computerChoice);
+        showUI(playerChoice, computerChoice);
         return "draw";
     }
 }
@@ -72,15 +72,18 @@ function calculateScore(roundResult)
     {
         case "player wins":
             playerScore++;
-            showScoreUI(playerScore, computerScore);
-            announcement.innerText = "You won this round!";
+            showUI(playerScore, computerScore);
+            showUI("You won this round!");
+            break;
         case "computer wins":
             computerScore++;
-            showScoreUI(playerScore, computerScore);
-            announcement.innerText = "Computer won this round!";
+            showUI(playerScore, computerScore);
+            showUI("Computer won this round!");
+            break;
         case "draw":
-            showScoreUI(playerScore, computerScore);
-            announcement.innerText = "Drawn!";
+            showUI(playerScore, computerScore);
+            showUI("Drawn!");
+            break;
     }
 }
 
@@ -89,6 +92,15 @@ function handlePlayGround()
 
 }
 // -- Show UI --
+function showUI(...args)
+{
+    dispatchEvent(new CustomEvent("showUI", {detail: args}));
+}
+
+addEventListener("showUI", e => showChoiceUI(...e.detail));
+addEventListener("showUI", e => showScoreUI(...e.detail));
+addEventListener("showUI", e => showAnnouncement(...e.detail));
+
 function showChoiceUI(playerChoice, computerChoice)
 {
     choicesUI.innerText = `You choose ${playerChoice}, conputer choose ${computerChoice}.`;
@@ -98,6 +110,11 @@ function showScoreUI(playerScore, computerScore)
 {
     playerScoreUI.innerText = "Player Score: " + playerScore;
     computerScoreUI.innerText = "Computer Score: " + computerScore;
+}
+
+function showAnnouncement(announce)
+{
+    announcement.innerText = announce;
 }
 //#endregion
 
