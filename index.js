@@ -1,9 +1,3 @@
-let playerChoice 
-let computerChoice = getComputerChoice();
-console.log(computerChoice);
-let playerScore = 0;
-let computerScore = 0;
-
 //#region Query Select & Listeners Attach
 const title = document.querySelector("#title");
 const promote = document.querySelector("#promote");
@@ -46,7 +40,7 @@ function getRoundWinner(playerChoice, computerChoice)
         (playerChoice === "scissors" && computerChoice === "paper") ||
         (playerChoice === "paper" && computerChoice === "rock"))
     {
-        showUI(playerChoice, computerChoice);
+        showChoiceUI(playerChoice, computerChoice);
         return "player wins";
     }
 
@@ -55,13 +49,13 @@ function getRoundWinner(playerChoice, computerChoice)
         (playerChoice === "scissors" && computerChoice === "rock") ||
         (playerChoice === "paper" && computerChoice === "scissors"))
     {
-        showUI(playerChoice, computerChoice);
+        showChoiceUI(playerChoice, computerChoice);
         return "computer wins";
     }
     
     else 
     {
-        showUI(playerChoice, computerChoice);
+        showChoiceUI(playerChoice, computerChoice);
         return "draw";
     }
 }
@@ -72,35 +66,30 @@ function calculateScore(roundResult)
     {
         case "player wins":
             playerScore++;
-            showUI(playerScore, computerScore);
-            showUI("You won this round!");
+            showScoreUI(playerScore, computerScore);
+            showAnnouncement("You won this round!");
             break;
         case "computer wins":
             computerScore++;
-            showUI(playerScore, computerScore);
-            showUI("Computer won this round!");
+            showScoreUI(playerScore, computerScore);
+            showAnnouncement("Computer won this round!");
             break;
         case "draw":
-            showUI(playerScore, computerScore);
-            showUI("Drawn!");
+            showScoreUI(playerScore, computerScore);
+            showAnnouncement("Drawn!");
             break;
     }
 }
 
-function handlePlayGround()
+function handlePlayground()
 {
-
+    let playerChoice 
+    let computerChoice = getComputerChoice();
+    console.log(computerChoice);
+    let playerScore = 0;
+    let computerScore = 0;
 }
 // -- Show UI --
-function showUI(...args)
-{
-    dispatchEvent(new CustomEvent("showUI", {detail: args}));
-}
-
-addEventListener("showUI", e => showChoiceUI(...e.detail));
-addEventListener("showUI", e => showScoreUI(...e.detail));
-addEventListener("showUI", e => showAnnouncement(...e.detail));
-
 function showChoiceUI(playerChoice, computerChoice)
 {
     choicesUI.innerText = `You choose ${playerChoice}, conputer choose ${computerChoice}.`;
