@@ -49,12 +49,20 @@ addEventListener("mouseout", e => {
     }
 });
 
-buttons.addEventListener("click", e => {
-    if (e.target && e.target.nodeName === "BUTTON" && e.target.id === "accept-button")
+addEventListener("click", e => {
+    // Trigger Game Start 
+    if (e.target && e.target.nodeName === "IMG")
+    {
+        playerChoice = e.target.id;
+        handlePlayground(playerChoice);
+    }
+
+    else if (e.target && e.target.nodeName === "BUTTON" && e.target.id === "accept-button")
     {
         e.stopPropagation();
         resetStatus();
     }
+
     else if (e.target && e.target.nodeName === "BUTTON" && e.target.id === "unaccept-button")
     {
         e.stopPropagation();
@@ -62,12 +70,6 @@ buttons.addEventListener("click", e => {
 
     }
 });
-
-// Trigger Game Start
-choiceContainer.addEventListener("click", e => {
-    playerChoice = e.target.id;
-    handlePlayground(playerChoice);
-}); 
 //#endregion
 
 //#region Funcitons
