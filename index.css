@@ -85,9 +85,10 @@ ol
     width: 100%;
 }
 .overlay .container {
-    background-color: aliceblue;
+    background-color:  rgb(173, 230, 220);
     height: 35%;
     width: 45%;
+    min-width: 400px;
     padding: 16px;
     border-radius: 15px;
     flex-flow: column;
@@ -96,6 +97,7 @@ ol
 .overlay .container h2 {
     font-size: 42px;
     margin-bottom: 24px;
+    text-align: center;
 }
 .overlay .container p {
     font-size: 24px;
@@ -104,12 +106,18 @@ ol
 }
 .overlay .container .buttons {
     width: 100%;
-    margin-bottom: 16px;
+    margin-top: auto;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-around;
 }
 .container .buttons button {
-    background-color: aqua;
+    background-color: darkcyan;
     color: rgb(255, 255, 255);
+    width: 20%;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
     border: none;
+    border-radius: 5px;
 }
