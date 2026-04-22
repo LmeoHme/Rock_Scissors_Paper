@@ -4,14 +4,20 @@ let playerChoice;
 let computerChoice;
 
 //#region Query Select & Listeners Attach
-const title = document.querySelector("#title");
-const promote = document.querySelector("#promote");
+const title = document.querySelector("#head-title");
 const choiceContainer = document.querySelector("#choice-container");
 const result = document.querySelector("#result");
 const choicesUI = result.firstElementChild;
 const playerScoreUI = choicesUI.nextElementSibling;
 const computerScoreUI = playerScoreUI.nextElementSibling;
 const announcement = computerScoreUI.nextElementSibling;
+const finalAnounce = document.querySelector("#final-announcement");
+const finalWinner = document.querySelector("#final-winner");
+const rematchPromotion = finalWinner.nextElementSibling;
+const accept = rematchPromotion.nextElementSibling;
+const unaccept = accept.nextElementSibling;
+
+// finalAnounce.classList.toggle("overlay");
 
 choiceContainer.addEventListener("mouseover", e => {
     if (e.target &&  e.target.nodeName === "IMG") 
@@ -97,7 +103,8 @@ function getMatchWinner(playerScore, computerScore)
 {
     if (playerScore === 3) 
     {
-        
+        finalWinner.innerText = "WINNER! WINNER! CHICKEN DINNER!"
+        rematchPromotion.innerText = "Wanna dominate again ?"
     }
 }
 // -- Show UI --

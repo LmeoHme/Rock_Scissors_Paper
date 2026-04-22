@@ -18,7 +18,7 @@ ol
     list-style: none;
 }
 
-#title {
+.title {
     color: rgb(255, 255, 255);
     font-size: 72px;
     padding: 16px 32px;
@@ -26,7 +26,7 @@ ol
     text-align: center;
 }
 
-#instructions {
+.panel {
     color: rgb(255, 255, 255);
     font-size: 36px;
     margin-bottom: 36px;
@@ -35,12 +35,12 @@ ol
     justify-content: center;
     align-items: center;
 }
-#instructions h3 {
+.panel h3 {
     font-size: 48px;
     text-decoration: underline;
 }
 
-#choice-container {
+.choices {
     margin-bottom: 16px;
     display: flex;
     flex-flow: wrap;
@@ -48,7 +48,7 @@ ol
     gap: 24px;
     width: 100%;
 }
-#choice-container img {
+.choices img {
     height: 400px;
     width: 300px;
     object-fit: cover;
@@ -56,17 +56,60 @@ ol
     box-sizing: border-box;
 }
 
-#result {
+.ui {
     color: rgb(255, 255, 255);
     font-size: 36px;
     padding: 8px 16px;
 }
-#result p {
+.ui p {
     margin: 8px;
 }
-#result .announcement {
+.ui .announcement {
     font-size: 48px;
     font-weight: 900;
     text-align: center;
     padding: 8px;
+}
+
+.overlay,
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay {
+    position: fixed;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 85%);
+    height: 100%;
+    width: 100%;
+}
+.overlay .container {
+    background-color: aliceblue;
+    height: 35%;
+    width: 45%;
+    padding: 16px;
+    border-radius: 15px;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+.overlay .container h2 {
+    font-size: 42px;
+    margin-bottom: 24px;
+}
+.overlay .container p {
+    font-size: 24px;
+    padding: 0 16px;
+    margin-bottom: 24px;
+}
+.overlay .container .buttons {
+    width: 100%;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-around;
+}
+.container .buttons button {
+    background-color: aqua;
+    color: rgb(255, 255, 255);
+    border: none;
 }

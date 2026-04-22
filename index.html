@@ -8,9 +8,9 @@
     <script type="module" src="index.js"></script>
 </head>
 <body>
-    <h1 id="title">Rock - Scissors - Paper Game</h1>
+    <h1 id="head-title" class="title">Rock - Scissors - Paper Game</h1>
 
-    <div id="instructions">
+    <div id="instructions" class="panel">
         <h3>Instrucions:</h3>
         <ol>
             <li>1. Choose one of three selecions below.</li>
@@ -19,17 +19,28 @@
         </ol>
     </div>
     
-    <div id="choice-container"> 
+    <div id="choice-container" class="choices"> 
         <img id="rock" src="/img/The_Rock.jpg" alt="Rock">
         <img id="scissors" src="/img/Scissors.jpg" alt="Scissors">
         <img id="paper" src="/img/Paper.jpg" alt="Paper">
     </div>
 
-    <div id="result">
-        <p class="choicesUI"></p>
-        <p class="playerScoreUI"></p>
-        <p class="computerScoreUI"></p>
+    <div id="result" class="ui">
+        <p class="choices-ui"></p>
+        <p class="player-score-ui"></p>
+        <p class="computer-score-ui"></p>
         <p class="announcement"></p>
+    </div>
+
+    <div id="final-announcement" class="overlay">
+        <div class="container">
+            <h2 id="final-winner">???</h2>
+            <p id="rematch-promotion">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat eum illo illum ut cum iusto necessitatibus et repudiandae, obcaecati qui, libero nemo aliquam suscipit dignissimos nam sed officia consequuntur doloremque.</p>
+            <div class="buttons">
+                <button id="accept-button">Why not?</button>
+                <button id="unaccept-button">Nah</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
