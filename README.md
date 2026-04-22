@@ -11,3 +11,5 @@ In this project:
 v2.0:
  - In this version, I added UI and changed the gameplay form JS only to simple UI interactable.
  - JS logic use simple event handling. UI has simple visual change.
+
+ All the picture credits goes to https://pixabay.com/vi/ 
